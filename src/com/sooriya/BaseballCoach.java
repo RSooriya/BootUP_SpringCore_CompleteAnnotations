@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope("singleton")
+@Scope("singleton") // bean scope
 public class BaseballCoach implements Coach {
 	
-	@Value("${name}")
+	@Value("${name}")    // to read values from property file
 	private String name;
 	@Value("${email}")
 	private String email;
@@ -34,7 +34,7 @@ public class BaseballCoach implements Coach {
 	}
 
 	@Autowired
-	@Qualifier("RESTFortuneService")
+	@Qualifier("RESTFortuneService")        // to choose which implementation for injection
 	private FortuneService fortuneService;
 
 	@Override
@@ -46,12 +46,12 @@ public class BaseballCoach implements Coach {
 	public String getDailyFortune() {
 		return fortuneService.getFortune();
 	}
-    @PostConstruct
+    @PostConstruct           // init method
     public void initmethod()
     {
     	System.out.println("Inside init method");
     }
-    @PreDestroy
+    @PreDestroy        // destroy method
     public void destroymethod()
     {
     	System.out.println("Inside destroy method");
